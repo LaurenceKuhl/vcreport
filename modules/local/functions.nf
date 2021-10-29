@@ -24,13 +24,12 @@ def initOptions(Map args) {
     return options
 }
 
+
 //
-// Tidy up and join elements of a list to return a path string
+// Extract name of module from process name using $task.process
 //
-def getPathFromList(path_list) {
-    def paths = path_list.findAll { item -> !item?.trim().isEmpty() }      // Remove empty entries
-    paths     = paths.collect { it.trim().replaceAll("^[/]+|[/]+\$", "") } // Trim whitespace and trailing slashes
-    return paths.join('/')
+def getProcessName(task_process) {
+    return task_process.tokenize(':')[-1]
 }
 
 //

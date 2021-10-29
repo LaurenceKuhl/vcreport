@@ -1,6 +1,6 @@
 ---
 title: " - Project Report"
-subtitle: "Exome background of glioblastoma cell lines"
+subtitle: "  "
 author: "Authors"
 date: '`r format(Sys.Date(), "%B %d, %Y")`'
 output:

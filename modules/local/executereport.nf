@@ -14,7 +14,7 @@ include { initOptions; saveFiles; getSoftwareName; getProcessName } from './func
 // TODO nf-core: Software that can be piped together SHOULD be added to separate module files
 //               unless there is a run-time, storage advantage in implementing in this way
 //               e.g. it's ok to have a single module for bwa to output BAM instead of SAM:
-//                 bwa mem | samtools view -B -T ref.fasta
+//                 bwa mem | samtools view -B -T ref.
 // TODO nf-core: Optional inputs are not currently supported by Nextflow. However, using an empty
 //               list (`[]`) instead of a file can be used to work around this issue.
 
@@ -39,29 +39,25 @@ process EXECUTEREPORT {
     input:
     // TODO nf-core: Where applicable all sample-specific information e.g. "id", "single_end", "read_group"
     //               MUST be provided as an input via a Groovy Map called "meta".
-    //               This information may not be required in some instances e.g. indexing reference genome files:
+    //               This information may not be required in some instances e.g. indexing reference ls files:
     //               https://github.com/nf-core/modules/blob/master/software/bwa/index/main.nf
     // TODO nf-core: Where applicable please provide/convert compressed files as input/output
     //               e.g. "*.fastq.gz" and NOT "*.fastq", "*.bam" and NOT "*.sam" etc.
-    path multiqc
+    path val(meta), file(vcf)
+
 
     output:
-    file "VC_report.html" , emit: vc_report
+    path "VC_report.html" , emit: vc_report
     path "versions.yml"   , emit: versions
+
 
     script:
     def prefix = options.suffix ? "${meta.id}${options.suffix}" : "${meta.id}"
-    // TODO nf-core: Where possible, a command MUST be provided to obtain the version number of the software e.g. 1.10
-    //               If the software is unable to output a version number on the command-line then it can be manually specified
-    //               e.g. https://github.com/nf-core/modules/blob/master/software/homer/annotatepeaks/main.nf
-    //               Each software used MUST provide the software name and version number in the YAML version file (versions.yml)
     // TODO nf-core: It MUST be possible to pass additional parameters to the tool as a command-line string via the "$options.args" variable
-    // TODO nf-core: If the tool supports multi-threading then you MUST provide the appropriate parameter
-    //               using the Nextflow "task" variable e.g. "--threads $task.cpus"
-    // TODO nf-core: Please replace the example samtools command below with your module's command
-    // TODO nf-core: Please indent the command appropriately (4 spaces!!) to help with readability ;)
+
+
     """
-    Execute_report.R --report '$baseDir/assets/VC_report.Rmd' \
+    Execute_report.R --report '$projectDir/assets/VC_report.Rmd' \
     --output 'VC_report.html'
     """
 }

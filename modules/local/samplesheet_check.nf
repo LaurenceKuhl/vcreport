@@ -25,7 +25,7 @@ process SAMPLESHEET_CHECK {
     script: // This script is bundled with the pipeline, in nf-core/vcreport/bin/
     """
     check_samplesheet.py \\
-        $samplesheet \\
-        samplesheet.valid.csv
+        $samplesheet
+    cp $samplesheet samplesheet.valid.csv
     """
 }

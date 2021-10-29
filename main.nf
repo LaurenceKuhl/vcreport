@@ -11,13 +11,8 @@
 
 nextflow.enable.dsl = 2
 
-/*
-========================================================================================
-    GENOME PARAMETER VALUES
-========================================================================================
-*/
 
-params.fasta = WorkflowMain.getGenomeAttribute(params, 'fasta')
+
 
 /*
 ========================================================================================
@@ -34,26 +29,20 @@ WorkflowMain.initialise(workflow, params, log)
 */
 
 include { VCREPORT } from './workflows/vcreport'
+include { EXECUTEREPORT } from './modules/local/executereport' addParams( options: [:] )
 
 //
 // WORKFLOW: Run main nf-core/vcreport analysis pipeline
 //
 workflow NFCORE_VCREPORT {
     VCREPORT ()
+
 }
 
-/*
-========================================================================================
-    RUN ALL WORKFLOWS
-========================================================================================
-*/
-
-//
 // WORKFLOW: Execute a single named workflow for the pipeline
 // See: https://github.com/nf-core/rnaseq/issues/619
-//
 workflow {
-    NFCORE_VCREPORT ()
+    NFCORE_VCREPORT  ()
 }
 
 /*
