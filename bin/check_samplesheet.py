@@ -49,7 +49,7 @@ def check_samplesheet(file_in):
     https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
     """
 
-    sample_mapping_dict = {}
+    #sample_mapping_dict = {}
     with open(file_in, "r") as fin:
 
         ## Check header

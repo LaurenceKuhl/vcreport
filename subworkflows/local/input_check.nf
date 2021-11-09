@@ -13,15 +13,17 @@ workflow INPUT_CHECK {
     main:
     SAMPLESHEET_CHECK ( samplesheet )
         .splitCsv ( header:true, sep:',' )
-        .map { create_fastq_channels(it) }
+        .map { create_vcf_channels(it) }
         .set { reads }
+    // reads.dump()
 
     emit:
     reads // channel: [ val(meta), [ reads ] ]
+
 }
 
-// Function to get list of [ meta, [ fastq_1, fastq_2 ] ]
-def create_fastq_channels(LinkedHashMap col) {
+// Function to get list of [ meta, [ vcf_1, vcf_2 ] ]
+def create_vcf_channels(LinkedHashMap col) {
     def meta = [:]
     meta.id           = col.sample
 

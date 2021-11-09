@@ -28,8 +28,8 @@ WorkflowMain.initialise(workflow, params, log)
 ========================================================================================
 */
 
-include { VCREPORT } from './workflows/vcreport'
-include { EXECUTEREPORT } from './modules/local/executereport' addParams( options: [:] )
+include { VCREPORT } from './workflows/vcreport' addParams( options: [:] )
+
 
 //
 // WORKFLOW: Run main nf-core/vcreport analysis pipeline

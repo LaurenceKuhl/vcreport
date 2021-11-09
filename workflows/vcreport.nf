@@ -11,9 +11,6 @@ WorkflowVcreport.initialise(params, log)
 
 // TODO nf-core: Add all file path parameters for the pipeline to the list below
 // Check input path parameters to see if they exist
-// def checkPathParamList = [ params.input, params.multiqc_config, params.fasta ]
-// for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true) } }
-
 // Check mandatory parameters
 if (params.input) { ch_input = file(params.input) } else { exit 1, 'Input samplesheet not specified!' }
 
@@ -83,11 +80,19 @@ workflow VCREPORT {
         .collect()
         .set { ch_software_versions }
 
+
+
     GET_SOFTWARE_VERSIONS (
         ch_software_versions.map { it }.collect()
     )
 
-    EXECUTEREPORT(ch_input)
+    INPUT_CHECK(ch_input).reads.map {
+        meta, vcf ->
+        meta.id = meta.id.split('_')[0..-2].join('_')
+    [meta, vcf] }
+    .set { ch_input }
+
+    // EXECUTEREPORT(ch_input)
 }
 
 /*
