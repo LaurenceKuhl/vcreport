@@ -28,7 +28,7 @@ process EXECUTEREPORT {
         mode: params.publish_dir_mode,
         saveAs: { filename -> saveFiles(filename:filename, options:params.options, publish_dir:getSoftwareName(task.process), meta:meta, publish_by_meta:['id']) }
 
-    container "qbicpipelines/vcreport:dev"
+    container "qbicpipelines/rnadeseq:1.3.2"
 
 
     input:
@@ -38,22 +38,25 @@ process EXECUTEREPORT {
     //               https://github.com/nf-core/modules/blob/master/software/bwa/index/main.nf
     // TODO nf-core: Where applicable please provide/convert compressed files as input/output
     //               e.g. "*.fastq.gz" and NOT "*.fastq", "*.bam" and NOT "*.sam" etc.
-    path val(meta.id), file(vcf)
-
-
+    tuple val(meta), file(vcf)
+    path(proj_summary)
+    path(metadata)
 
     output:
     path "VC_report.html" , emit: vc_report
-    path "versions.yml"   , emit: versions
+    path "*version.txt"   , emit: versions
 
 
     script:
     def prefix = options.suffix ? "${meta.id}${options.suffix}" : "${meta.id}"
-    // TODO nf-core: It MUST be possible to pass additional parameters to the tool as a command-line string via the "$options.args" variable
 
 
     """
     Execute_report.R --report '$projectDir/assets/VC_report.Rmd' \
-    --output 'VC_report.html'
+    --proj_summary '$projectDir/test-data/$proj_summary' \
+    --output 'VC_report.html' \
+
+    Rscript -e "library(ggplot2); write(x=as.character(packageVersion('ggplot2')), file='ggplot2.version.txt')"
+    echo \$(R --version 2>&1) | awk -F' '  '{print \$3}' > R.version.txt
     """
 }

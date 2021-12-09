@@ -13,7 +13,9 @@ WorkflowVcreport.initialise(params, log)
 // Check input path parameters to see if they exist
 // Check mandatory parameters
 if (params.input) { ch_input = file(params.input) } else { exit 1, 'Input samplesheet not specified!' }
-
+if(params.project_summary) { ch_proj_summary_file = Channel.fromPath(params.project_summary) } else { exit 1, 'Project summary not specified!' }
+if(params.metadata) {ch_metadata_file = Channel.fromPath(params.metadata) } else { exit 1, 'Metadata not specified!' }
+// ch_multiqc_custom_config = params.multiqc_config ? Channel.fromPath(params.multiqc_config) : Channel.empty()
 /*
 ========================================================================================
     CONFIG FILES
@@ -88,11 +90,11 @@ workflow VCREPORT {
 
     INPUT_CHECK(ch_input).reads.map {
         meta, vcf ->
-        meta.id = meta.id.split('_')[0..-2].join('_')
+        meta.id = meta.id
     [meta, vcf] }
     .set { ch_input }
 
-    // EXECUTEREPORT(ch_input)
+    EXECUTEREPORT(ch_input, ch_proj_summary_file, ch_metadata_file )
 }
 
 /*

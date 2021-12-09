@@ -24,6 +24,26 @@
                     "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row. See [usage docs](https://nf-co.re/vcreport/usage#samplesheet-input).",
                     "fa_icon": "fas fa-file-csv"
                 },
+                "project_summary": {
+                    "type": "string",
+                    "format": "file-path",
+                    "mimetype": "text/tsv",
+                    "pattern": "^\\S+\\.tsv$",
+                    "schema": "assets/schema_input.json",
+                    "description": "Project summary as downloaded from the portal",
+                    "help_text": "You will need to create a design file with information about the project subject and the members of the project before running the pipeline. Use this parameter to specify its location. It has to be a tab-separated file with 22 columns, and a header row. See [usage docs](https://nf-co.re/vcreport/usage#samplesheet-input).",
+                    "fa_icon": "fas fa-file-csv"
+                },
+                "metadata": {
+                    "type": "string",
+                    "format": "file-path",
+                    "mimetype": "text/tsv",
+                    "pattern": "^\\S+\\.tsv$",
+                    "schema": "assets/schema_input.json",
+                    "description": "Metadata of samples as downloaded from the portal",
+                    "help_text": "You will need to create a design file with information about the project subject and the members of the project before running the pipeline. Use this parameter to specify its location. It has to be a tab-separated file with 22 columns, and a header row. See [usage docs](https://nf-co.re/vcreport/usage#samplesheet-input).",
+                    "fa_icon": "fas fa-file-csv"
+                },
                 "outdir": {
                     "type": "string",
                     "description": "Path to the output directory where the results will be saved.",
