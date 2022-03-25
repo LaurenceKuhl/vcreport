@@ -1,0 +1,13 @@
+QBiC Code	Secondary Name	Lab ID	Sample Type	Source	Source Name(s)	Source Lab ID(s)	Extract Code(s)	Extract Name(s)	Extract Lab ID(s)	Condition: tumortype	Condition: treatment	Condition: antibody	Condition: dignity	Condition: time
+QAQAM003AU	AML194_pre	AML194_pre	PROTEINS	Patient 1	AML194	AML194	QAQAM001AE	AML194-Blood-1	AML194-Blood-1	AML	Pre	W6_32	Malignant	baseline
+QAQAM004A4	AML194_72_DMSO	AML194_72_DMSO	PROTEINS	Patient 1	AML194	AML194	QAQAM001AE	AML194-Blood-1	AML194-Blood-1	AML	DMSO	W6_32	Malignant	72hours
+QAQAM005AC	AML194_96_DMSO	AML194_96_DMSO	PROTEINS	Patient 1	AML194	AML194	QAQAM001AE	AML194-Blood-1	AML194-Blood-1	AML	DMSO	W6_32	Malignant	96hours
+QAQAM006AK	AML194_72_DecitabineVorinostat	AML194_72_DecitabineVorinostat	PROTEINS	Patient 1	AML194	AML194	QAQAM001AE	AML194-Blood-1	AML194-Blood-1	AML	DecitabineVorinostat	W6_32	Malignant	72hours
+QAQAM007AS	AML194_96_DecitabineVorinostat	AML194_96_DecitabineVorinostat	PROTEINS	Patient 1	AML194	AML194	QAQAM001AE	AML194-Blood-1	AML194-Blood-1	AML	DecitabineVorinostat	W6_32	Malignant	96hours
+QAQAM008A2	EOL1_pre1	EOL1_pre1	PROTEINS	Patient 2	EOL1	EOL1	QAQAM002AM	EOL1-Blood-1	EOL1-Blood-1	AML	Pre	W6_32	Malignant	baseline
+QAQAM009AA	EOL1_72_DMSO1	EOL1_72_DMSO1	PROTEINS	Patient 2	EOL1	EOL1	QAQAM002AM	EOL1-Blood-1	EOL1-Blood-1	AML	DMSO	W6_32	Malignant	72hours
+QAQAM010AD	EOL1_96_DMSO1	EOL1_96_DMSO1	PROTEINS	Patient 2	EOL1	EOL1	QAQAM002AM	EOL1-Blood-1	EOL1-Blood-1	AML	DMSO	W6_32	Malignant	96hours
+QAQAM011AL	EOL1_72_Decitabine1	EOL1_72_Decitabine1	PROTEINS	Patient 2	EOL1	EOL1	QAQAM002AM	EOL1-Blood-1	EOL1-Blood-1	AML	Decitabine	W6_32	Malignant	72hours
+QAQAM012AT	EOL1_96_Decitabine1	EOL1_96_Decitabine1	PROTEINS	Patient 2	EOL1	EOL1	QAQAM002AM	EOL1-Blood-1	EOL1-Blood-1	AML	Decitabine	W6_32	Malignant	96hours
+QAQAM013A3	EOL1_72_DecitabineVorinostat1	EOL1_72_DecitabineVorinostat1	PROTEINS	Patient 2	EOL1	EOL1	QAQAM002AM	EOL1-Blood-1	EOL1-Blood-1	AML	DecitabineVorinostat	W6_32	Malignant	72hours
+QAQAM014AB	EOL1_96_DecitabineVorinostat1	EOL1_96_DecitabineVorinostat1	PROTEINS	Patient 2	EOL1	EOL1	QAQAM002AM	EOL1-Blood-1	EOL1-Blood-1	AML	DecitabineVorinostat	W6_32	Malignant	96hours

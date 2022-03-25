@@ -37,10 +37,15 @@ def modules = params.modules.clone()
 //
 include { GET_SOFTWARE_VERSIONS } from '../modules/local/get_software_versions' addParams( options: [publish_files : ['tsv':'']] )
 include { EXECUTEREPORT } from '../modules/local/executereport' addParams( options: [:] )
+include { BCFTOOLS_STATS } from '../modules/nf-core/modules/bcftools/stats/main' addParams( options: [:] )
+include { BCFTOOLS_VIEW } from '../modules/nf-core/modules/bcftools/view/main' addParams( options: [:] )
+
 //
 // SUBWORKFLOW: Consisting of a mix of local and nf-core/modules
 //
 include { INPUT_CHECK } from '../subworkflows/local/input_check' addParams( options: [:] )
+include { VCF_FILTER } from '../subworkflows/local/vcf_filter' addParams( options: [:] )
+
 
 /*
 ========================================================================================
@@ -94,7 +99,11 @@ workflow VCREPORT {
     [meta, vcf] }
     .set { ch_input }
 
-    EXECUTEREPORT(ch_input, ch_proj_summary_file, ch_metadata_file )
+    VCF_FILTER( ch_input )
+
+    EXECUTEREPORT(ch_input.collect(),
+        ch_proj_summary_file,
+        ch_metadata_file )
 }
 
 /*

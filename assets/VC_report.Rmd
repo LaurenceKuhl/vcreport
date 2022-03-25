@@ -13,8 +13,9 @@ output:
 bibliography: ./references.bibtex
 params:
   path_proj_summary: ""
+  path_metadata: ""
   path_wd: ""
-# Author: Silvia Morini, Gisela Gabernet, Simon Heumos
+# Author: Laurence Kuhlburger, Gisela Gabernet
 ---
 
 ```{r, bootstrap.show.message=FALSE, echo=FALSE, message=FALSE, warning=FALSE}
@@ -47,3 +48,58 @@ date: '`r format(Sys.Date(), "%B %d, %Y")`'
 
 <img src="./logo.png" style="position:absolute;top:0px;right:0px;" height="200" width="200" />
 <div class="watermark">QBiC</div>
+
+```{r docSetup, bootstrap.show.code = FALSE, dev = 'png', bootstrap.show.message=FALSE, echo=FALSE, message=FALSE}
+## knitrBoostrap and device chunk options
+options(warn = -1)                          # suppress warnings and messages
+library(knitr)
+opts_chunk$set(bootstrap.show.code = FALSE, dev = 'png', echo=FALSE)
+```
+\
+\
+\
+\
+
+**Project Members:**
+
+***`r PI`***
+
+`r PI_email`
+
+`r PI_institute`
+
+`r PI_organization`
+
+`r PI_address`
+
+\
+\
+**QBiC contacts:**
+
+***`r PM`***
+
+`r PM_email`
+
+Auf der Morgenstelle 10, 72076 Tuebingen
+
+***
+***
+
+# Introduction and aims
+
+`r description`
+
+# Sample metadata
+
+```{r load, echo=FALSE, bootstrap.show.code=FALSE, message=FALSE}
+library(dplyr)
+library(kableExtra)
+library(knitr)
+```
+
+```{r setup, echo=FALSE, message=FALSE}
+#print(params$metadata)
+df_QA <- read.table(file = params$path_metadata, sep="\t", header = TRUE,  check.names = FALSE)
+# df_QA <- read.table(QAfile, header=TRUE, sep="\t", check.names = FALSE)
+
+```

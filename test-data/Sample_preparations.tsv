@@ -1,4 +1,4 @@
-QBiC Code	Secondary Name	Lab ID	Sample Type	Source	Source Name(s)	Source Lab ID(s)	Extract Code(s)	Extract Name(s)	Extract Lab ID(s)	Condition: genotype	Condition: treatment	Condition: time
+QBiC Code   Secondary Name	Lab ID	Sample Type	Source	Source Name(s)	Source Lab ID(s)	Extract Code(s)	Extract Name(s)	Extract Lab ID(s)	Condition: genotype	Condition: treatment	Condition: time
 QBICK025A0	Sample1	1_EV1_PBS_1H	RNA	Mus musculus 1	WT ; Control ; 1H	1_EV1_PBS_1H	QBICK001AM	WT ; Control ; 1H	1_EV1_PBS_1H	WT	Control	1H
 QBICK026A8	Sample2	3_EV2_PBS_1H	RNA	Mus musculus 2	WT ; Control ; 1H	3_EV2_PBS_1H	QBICK002AU	WT ; Control ; 1H	3_EV2_PBS_1H	WT	Control	1H
 QBICK027AG	Sample3	5_EV3_PBS_1H	RNA	Mus musculus 3	WT ; Control ; 1H	5_EV3_PBS_1H	QBICK003A4	WT ; Control ; 1H	5_EV3_PBS_1H	WT	Control	1H

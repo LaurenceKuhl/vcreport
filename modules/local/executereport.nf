@@ -53,7 +53,8 @@ process EXECUTEREPORT {
 
     """
     Execute_report.R --report '$projectDir/assets/VC_report.Rmd' \
-    --proj_summary '$projectDir/test-data/$proj_summary' \
+    --proj_summary $proj_summary \
+    --metadata $metadata \
     --output 'VC_report.html' \
 
     Rscript -e "library(ggplot2); write(x=as.character(packageVersion('ggplot2')), file='ggplot2.version.txt')"
