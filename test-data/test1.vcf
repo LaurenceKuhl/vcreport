@@ -1,31 +1,101 @@
-##fileformat=VCFv4.0
-##fileDate=20090805
-##source=myImputationProgramV3.1
-##reference=1000GenomesPilot-NCBI36
-##phasing=partial
-##INFO=<ID=NS,Number=1,Type=Integer,Description="Number of Samples With Data">
-##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
-##INFO=<ID=AC,Number=.,Type=Integer,Description="Allele count in genotypes, for each ALT allele, in the same order as listed">
-##INFO=<ID=DP,Number=1,Type=Integer,Description="Total Depth">
-##INFO=<ID=AF,Number=.,Type=Float,Description="Allele Frequency">
-##INFO=<ID=AA,Number=1,Type=String,Description="Ancestral Allele">
-##INFO=<ID=DB,Number=0,Type=Flag,Description="dbSNP membership, build 129">
-##INFO=<ID=H2,Number=0,Type=Flag,Description="HapMap2 membership">
-##FILTER=<ID=q10,Description="Quality below 10">
-##FILTER=<ID=s50,Description="Less than 50% of samples have data">
+##fileformat=VCFv4.1
+##fileDate=20180129
+##source=strelka
+##source_version=2.8.2
+##startTime=Mon Jan 29 14:01:11 2018
+##cmdline=/opt/strelka/bin/configureStrelkaGermlineWorkflow.py --bam 1234N.recal.bam --referenceFasta human_g1k_v37_decoy.small.fasta --runDir Strelka
+##reference=file:///home/max/workspace/github/CAW/References/smallGRCh37/human_g1k_v37_decoy.small.fasta
+##contig=<ID=1,length=200000>
+##contig=<ID=2,length=200000>
+##contig=<ID=3,length=200000>
+##contig=<ID=8,length=1282>
+##contig=<ID=11,length=3696>
+##contig=<ID=X,length=200000>
+##content=strelka germline small-variant calls
+##INFO=<ID=END,Number=1,Type=Integer,Description="End position of the region described in this record">
+##INFO=<ID=BLOCKAVG_min30p3a,Number=0,Type=Flag,Description="Non-variant multi-site block. Non-variant blocks are defined independently for each sample. All sites in such a block are constrained to be non-variant, have the same filter value, and have sample values {GQX,DP,DPF} in range [x,y], y <= max(x+3,(x*1.3)).">
+##INFO=<ID=SNVHPOL,Number=1,Type=Integer,Description="SNV contextual homopolymer length">
+##INFO=<ID=CIGAR,Number=A,Type=String,Description="CIGAR alignment for each alternate indel allele">
+##INFO=<ID=RU,Number=A,Type=String,Description="Smallest repeating sequence unit extended or contracted in the indel allele relative to the reference. RUs are not reported if longer than 20 bases">
+##INFO=<ID=REFREP,Number=A,Type=Integer,Description="Number of times RU is repeated in reference">
+##INFO=<ID=IDREP,Number=A,Type=Integer,Description="Number of times RU is repeated in indel allele">
+##INFO=<ID=MQ,Number=1,Type=Integer,Description="RMS of mapping quality">
 ##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
-##FORMAT=<ID=GQ,Number=1,Type=Integer,Description="Genotype Quality">
-##FORMAT=<ID=DP,Number=1,Type=Integer,Description="Read Depth">
-##FORMAT=<ID=HQ,Number=2,Type=Integer,Description="Haplotype Quality">
-##ALT=<ID=DEL:ME:ALU,Description="Deletion of ALU element">
-##ALT=<ID=CNV,Description="Copy number variable region">
-#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NA00001	NA00002	NA00003
-12	111	.	A	C	9.6	.	.	GT:HQ	0|0:10,10	0|0:10,10	0/1:3,3
-13	112	.	A	T	10	.	.	GT:HQ	0|0:10,10	0|0:10,10	0/1:3,3
-20	14370	rs6054257	G	A	29	PASS	NS=3;DP=14;AF=0.5;DB;H2	GT:GQ:DP:HQ	0|0:48:1:51,51	1|0:48:8:51,51	1/1:43:5:.,.
-20	17330	.	T	A	3	q10	NS=3;DP=11;AF=0.017	GT:GQ:DP:HQ	0|0:49:3:58,50	0|1:3:5:65,3	0/0:41:3:.,.
-11	1110696	rs6040355	A	G,T	67	PASS	NS=2;DP=10;AF=0.333,0.667;AA=T;DB	GT:GQ:DP:HQ	1|2:21:6:23,27	2|1:2:0:18,2	2/2:35:4:.,.
-20	1230237	.	T	.	47	PASS	NS=3;DP=13;AA=T	GT:GQ:DP:HQ	0|0:54:.:56,60	0|0:48:4:51,51	0/0:61:2:.,.
-20	1234567	microsat1	G	GA,GAC	50	PASS	NS=3;DP=9;AA=G;AN=6;AC=3,1	GT:GQ:DP	0/1:.:4	0/2:17:2	1/1:40:3
-20	1235237	.	T	.	.	.	.	GT	0/0	0|0	./.
-X	10	rsTest	AC	A,ATG	10	PASS	.	GT	0	0/1	0|2
+##FORMAT=<ID=GQ,Number=1,Type=Float,Description="Genotype Quality">
+##FORMAT=<ID=GQX,Number=1,Type=Integer,Description="Empirically calibrated genotype quality score for variant sites, otherwise minimum of {Genotype quality assuming variant position,Genotype quality assuming non-variant position}">
+##FORMAT=<ID=DP,Number=1,Type=Integer,Description="Filtered basecall depth used for site genotyping. In a non-variant multi-site block this value represents the average of all sites in the block.">
+##FORMAT=<ID=DPF,Number=1,Type=Integer,Description="Basecalls filtered from input prior to site genotyping. In a non-variant multi-site block this value represents the average of all sites in the block.">
+##FORMAT=<ID=MIN_DP,Number=1,Type=Integer,Description="Minimum filtered basecall depth used for site genotyping within a non-variant multi-site block">
+##FORMAT=<ID=AD,Number=.,Type=Integer,Description="Allelic depths for the ref and alt alleles in the order listed. For indels this value only includes reads which confidently support each allele (posterior prob 0.51 or higher that read contains indicated allele vs all other intersecting indel alleles)">
+##FORMAT=<ID=ADF,Number=.,Type=Integer,Description="Allelic depths on the forward strand">
+##FORMAT=<ID=ADR,Number=.,Type=Integer,Description="Allelic depths on the reverse strand">
+##FORMAT=<ID=FT,Number=1,Type=String,Description="Sample filter, 'PASS' indicates that all filters have passed for this sample">
+##FORMAT=<ID=DPI,Number=1,Type=Integer,Description="Read depth associated with indel, taken from the site preceding the indel">
+##FORMAT=<ID=PL,Number=G,Type=Integer,Description="Normalized, Phred-scaled likelihoods for genotypes as defined in the VCF specification">
+##FORMAT=<ID=PS,Number=1,Type=Integer,Description="Phase set identifier">
+##FORMAT=<ID=SB,Number=1,Type=Float,Description="Sample site strand bias">
+##FILTER=<ID=IndelConflict,Description="Indel genotypes from two or more loci conflict in at least one sample">
+##FILTER=<ID=SiteConflict,Description="Site is filtered due to an overlapping indel call filter">
+##FILTER=<ID=LowGQX,Description="Locus GQX is below threshold or not present">
+##FILTER=<ID=HighDPFRatio,Description="The fraction of basecalls filtered out at a site is greater than 0.4">
+##FILTER=<ID=HighSNVSB,Description="Sample SNV strand bias value (SB) exceeds 10">
+##FILTER=<ID=HighDepth,Description="Locus depth is greater than 3x the mean chromosome depth">
+##Depth_1=44.00
+##Depth_11=1.00
+##Depth_2=0.00
+##Depth_3=0.00
+##Depth_8=0.00
+##Depth_X=0.00
+##FILTER=<ID=LowDepth,Description="Locus depth is below 3">
+##FILTER=<ID=PloidyConflict,Description="Genotype call from variant caller not consistent with chromosome ploidy">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	1234N
+1	131731	.	C	T	0	LowGQX	SNVHPOL=7;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:7:0:14:2:12,2:12,2:0,0:0.0:LowGQX:8,0,113
+1	131957	.	C	A	6	PASS	SNVHPOL=2;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:37:5:27:2:21,6:5,2:16,4:-2.7:PASS:39,0,191
+1	131965	.	G	A	1	LowGQX	SNVHPOL=3;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:26:0:27:4:22,5:5,2:17,3:0.0:LowGQX:28,0,196
+1	132138	.	C	T	18	PASS	SNVHPOL=3;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:51:10:10:2:7,3:2,1:5,2:-5.2:PASS:53,0,104
+1	132359	.	C	T	0	LowGQX	SNVHPOL=3;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:6:0:15:0:13,2:8,0:5,2:0.0:LowGQX:7,0,144
+1	132420	.	G	A	0	LowGQX	SNVHPOL=3;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:15:0:16:2:14,2:8,1:6,1:0.0:LowGQX:16,0,159
+1	132455	.	C	G	4	PASS	SNVHPOL=2;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:35:5:16:1:13,3:7,1:6,2:-1.8:PASS:37,0,146
+1	132838	.	G	T	21	PASS	SNVHPOL=3;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:54:12:22:1:16,6:8,4:8,2:-4.9:PASS:56,0,163
+1	133129	.	G	A	154	PASS	SNVHPOL=3;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:162:30:57:3:27,30:15,18:12,12:-18.0:PASS:189,0,159
+1	133483	.	G	T	85	PASS	SNVHPOL=2;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:118:30:49:13:29,20:10,5:19,15:-9.5:PASS:120,0,200
+1	134266	.	G	A	0	LowGQX	SNVHPOL=4;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:22:0:25:2:21,4:5,1:16,3:0.0:LowGQX:23,0,200
+1	134367	.	G	A	0	LowGQX	SNVHPOL=4;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:12:0:47:5:34,12:5,0:29,12:0.0:LowGQX:13,0,264
+1	134516	.	G	A	0	LowGQX	SNVHPOL=2;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:14:0:16:0:14,2:8,1:6,1:0.0:LowGQX:15,0,161
+1	135539	.	C	T	28	PASS	SNVHPOL=2;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:61:12:16:2:11,5:2,2:9,3:-5.7:PASS:63,0,126
+1	135663	.	G	A	0	LowGQX	SNVHPOL=4;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:11:0:13:3:11,2:9,0:2,2:0.0:LowGQX:13,0,130
+1	135804	.	G	A	0	LowGQX	SNVHPOL=3;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:16:0:18:8:14,4:8,4:6,0:0.0:LowGQX:17,0,150
+1	135924	.	C	G	0	LowGQX	SNVHPOL=3;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:7:0:14:1:12,2:7,0:5,2:0.0:LowGQX:8,0,146
+1	135982	.	A	G	1	LowGQX;LowDepth	SNVHPOL=5;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:3:0:1:0:0,1:0,1:0,0:0.0:LowGQX;LowDepth:31,3,0
+1	136048	.	C	T	71	PASS	SNVHPOL=3;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:104:22:59:5:37,22:22,12:15,10:-11.2:PASS:106,0,247
+1	136635	.	T	G	79	LowGQX	SNVHPOL=4;MQ=25	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:112:1:31:14:17,14:7,7:10,7:-11.7:LowGQX:114,0,121
+1	136644	.	AG	A	43	LowGQX	CIGAR=1M1D;RU=G;REFREP=4;IDREP=3;MQ=22	GT:GQ:GQX:DPI:AD:ADF:ADR:FT:PL	0/1:81:1:41:28,9:13,4:15,5:LowGQX:78,0,407
+1	136848	.	G	A	0	LowGQX	SNVHPOL=3;MQ=28	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:23:0:40:11:32,8:13,3:19,5:0.0:LowGQX:25,0,240
+1	136962	.	C	T	193	LowGQX	SNVHPOL=3;MQ=39	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:82:0:54:19:19,35:10,2:9,33:-1.6:LowGQX:228,0,79
+1	136995	.	C	T	0	LowGQX	SNVHPOL=2;MQ=39	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:8:1:42:19:34,8:14,7:20,1:0.0:LowGQX:9,0,256
+1	137287	.	G	A	0	LowGQX	SNVHPOL=4;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:23:0:52:13:40,11:26,5:14,6:0.0:LowGQX:25,0,297
+1	137420	.	G	A	.	LowGQX	SNVHPOL=3;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/0:10:10:106:6:81,25:39,10:42,15:0.0:LowGQX:0,8,370
+1	137508	.	C	A	1	PASS	SNVHPOL=3;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:29:6:84:4:62,22:25,4:37,18:0.0:PASS:31,0,370
+1	137825	.	G	A	40	PASS	SNVHPOL=5;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:73:7:92:6:63,29:26,14:37,15:-5.0:PASS:74,0,370
+1	138156	.	G	T	255	PASS	SNVHPOL=4;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:104:30:70:7:25,45:12,28:13,17:-25.2:PASS:290,0,101
+1	138593	.	G	T	43	PASS	SNVHPOL=2;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:76:8:84:6:57,27:20,14:37,13:-2.1:PASS:78,0,370
+1	139233	.	C	A	.	PASS	SNVHPOL=3;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/0:24:24:96:9:74,22:41,11:33,11:0.0:PASS:0,22,370
+1	139781	.	G	A,C	44	PASS	SNVHPOL=2;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	1/1:5:4:4:0:0,3,1:0,2,1:0,1,0:-6.9:PASS:98,27,18,71,0,68
+1	139794	.	A	G	0	LowGQX	SNVHPOL=2;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:10:0:6:0:5,1:4,1:1,0:0.0:LowGQX:12,0,81
+1	139947	.	G	A	17	PASS	SNVHPOL=3;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:50:10:9:0:6,3:1,1:5,2:-5.7:PASS:52,0,77
+1	139967	.	T	C,A	53	PASS	SNVHPOL=3;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	1/1:7:5:5:0:0,4,1:0,1,0:0,3,1:-7.3:PASS:104,26,14,79,0,76
+1	139979	.	T	G	0	LowGQX	SNVHPOL=2;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:9:0:6:1:5,1:1,0:4,1:0.0:LowGQX:11,0,81
+1	140019	.	G	T	0	LowGQX	SNVHPOL=4;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:10:0:6:1:5,1:1,0:4,1:0.0:LowGQX:12,0,82
+1	140027	.	G	C	0	LowGQX	SNVHPOL=3;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:11:0:6:1:5,1:1,0:4,1:0.0:LowGQX:13,0,82
+1	140038	.	C	G	15	PASS	SNVHPOL=2;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:42:8:5:1:3,2:0,1:3,1:-4.5:PASS:49,0,40
+1	140144	.	A	G	0	LowGQX	SNVHPOL=4;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:21:0:15:1:12,3:10,0:2,3:0.0:LowGQX:22,0,135
+1	141012	.	G	T	0	LowGQX	SNVHPOL=4;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:9:0:7:0:6,1:3,1:3,0:0.0:LowGQX:11,0,105
+1	141033	.	A	C	0	LowGQX	SNVHPOL=2;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:3:0:9:0:8,1:3,0:5,1:0.0:LowGQX:3,0,121
+1	141040	.	T	G	0	LowGQX	SNVHPOL=3;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:3:0:9:0:8,1:3,0:5,1:0.0:LowGQX:3,0,125
+1	141263	.	C	T	1	LowGQX	SNVHPOL=4;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:25:0:7:0:5,2:1,2:4,0:0.0:LowGQX:27,0,89
+1	141270	.	A	C	0	LowGQX	SNVHPOL=2;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:4:0:9:0:8,1:3,0:5,1:0.0:LowGQX:4,0,115
+1	141356	.	C	G	0	LowGQX	SNVHPOL=3;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:10:0:6:0:5,1:0,1:5,0:0.0:LowGQX:12,0,69
+1	141394	.	G	C	0	LowGQX	SNVHPOL=2;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:10:0:6:0:5,1:1,0:4,1:0.0:LowGQX:12,0,83
+1	141399	.	C	T	0	LowGQX	SNVHPOL=2;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:11:0:6:0:5,1:1,0:4,1:0.0:LowGQX:13,0,85
+1	141463	.	T	G	0	LowGQX	SNVHPOL=2;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:19:1:3:0:2,1:0,0:2,1:0.0:LowGQX:22,0,43
+1	141559	.	A	C	0	LowGQX	SNVHPOL=4;MQ=60	GT:GQ:GQX:DP:DPF:AD:ADF:ADR:SB:FT:PL	0/1:19:1:3:0:2,1:0,0:2,1:0.0:LowGQX:22,0,42
